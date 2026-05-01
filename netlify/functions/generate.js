@@ -1,61 +1,167 @@
 // MMK-CAPTION - Netlify Function
-// Model: meta-llama/llama-4-scout-17b-16e-instruct (Groq Vision)
+// Vision caption generator for IG/FB style captions.
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const VISION_MODEL = "meta-llama/llama-4-scout-17b-16e-instruct";
 
-const PROMPTS = {
-  ID: `Kamu adalah ahli copywriting media sosial khusus caption foto cewek untuk fanspage Facebook/Instagram Malaysia.
-Analisa foto yang diberikan, lalu buat TEPAT 5 caption pendek dalam Bahasa Indonesia gaul/kasual (bukan bahasa baku).
-Gaya caption: flirty, menggoda, manja, bikin penasaran cowok.
-Gunakan sapaan seperti "mas", "kak", "bang", "abang", atau "kamu".
-Setiap caption 1-2 baris saja, kombinasi dengan emoji yang cocok (1-3 emoji per caption).
-Referensi gaya bahasa dari caption IG/FB populer.
-
-Contoh gaya yang benar:
-- Hallo mas 🤭 lagi ngapain?
-- Kangen diajak jalan gak sih? 🥺💕
-- Aku nunggu lho, mau ke sini gak? 😏
-- Katanya mau chat aku, mana? 💋
-- Diperhatiin dikit boleh ya 🌸😊
-
-Format output: tulis hanya 5 caption, satu per baris, tanpa nomor, tanpa penjelasan tambahan.`,
-
-  EN: `You are a social media copywriting expert for a Malay girl fanspage on Facebook/Instagram.
-Analyze the photo and create EXACTLY 5 short flirty captions in casual English (not formal).
-Style: flirty, playful, teasing, making guys curious and attracted.
-Use terms like "hey", "you", "babe", "cutie", natural social media vibes.
-Each caption is 1-2 lines only, include 1-3 fitting emojis per caption.
-Reference popular IG/FB caption styles.
-
-Example style:
-- Hey you, still thinking about me? 🤭
-- Not sorry for being this cute 💅✨
-- Come find me if you dare 😏💋
-- Someone's staring... hi there 👀🌸
-- Soft on the outside, trouble on the inside 😈💕
-
-Format: write only 5 captions, one per line, no numbers, no extra explanation.`,
-
-  MY: `Kau pakar copywriting media sosial untuk fanspage Facebook/Instagram cewek Melayu.
-Analisis gambar yang diberikan, kemudian tulis TEPAT 5 caption pendek dalam Bahasa Melayu slang/kasual (bukan bahasa formal atau baku).
-Gaya: flirty, goda-goda, manja, buat lelaki terpikat dan penasaran.
-Guna sapaan seperti "awak", "abang", "kanda", "dia", atau sebutan kasual Melayu.
-Setiap caption 1-2 baris je, gabungkan dengan emoji yang sesuai (1-3 emoji per caption).
-Ikut gaya caption popular di IG/FB Malaysia.
-
-Contoh gaya yang betul:
-- Hi awak 💋 ingat aku tak?
-- Kau ingat nak ajak aku makan, bila? 🥺💕
-- Soft je dari luar, dalam tu lain cerita 😏
-- Tengok je ke, tak mau tegur ke? 👀🌸
-- Rindu tu tanggung sendiri tau 😌💜
-
-Format output: tulis 5 caption sahaja, satu baris satu caption, tanpa nombor, tanpa penjelasan tambahan.`
+const LANG_PROFILES = {
+  ID: {
+    label: "Bahasa Indonesia",
+    locale: "Indonesia",
+    style: "bahasa Indonesia gaul sosmed, natural, tidak baku, cocok untuk caption IG/FB Indonesia",
+    examples: [
+      "jangan cuma diliatin, disapa juga boleh 🤭",
+      "mode kalem, tapi bikin kepikiran 😌✨",
+      "senyum dikit biar harimu aman ya 😝"
+    ],
+    hashtagHints: {
+      ig: "#fyp #explorepage #viral #ootd #selfie #cantik #indonesia #reelsindonesia",
+      fb: "#fbviral #fypfb #facebookpost #viralindonesia #captionfb #fotohariini"
+    }
+  },
+  EN: {
+    label: "English",
+    locale: "global English IG/FB audience",
+    style: "casual social-media English, playful, short, non-formal, IG/FB native",
+    examples: [
+      "don’t just stare, say hi 🤭",
+      "soft look, dangerous effect 😌✨",
+      "cute enough to ruin your focus 😝"
+    ],
+    hashtagHints: {
+      ig: "#explorepage #fyp #viral #instagood #photooftheday #selfie #reels",
+      fb: "#facebookviral #fbpost #viralpost #trendingnow #photooftheday #socialpost"
+    }
+  },
+  MY: {
+    label: "Bahasa Melayu Malaysia",
+    locale: "Malaysia",
+    style: "Bahasa Melayu santai Malaysia, slang ringan, bukan baku Indonesia, natural untuk IG/FB Malaysia",
+    examples: [
+      "tengok je ke, tak nak tegur? 🤭",
+      "nampak soft, tapi bahaya sikit 😌✨",
+      "senyum sikit, terus hilang fokus kan 😝"
+    ],
+    hashtagHints: {
+      ig: "#fypmalaysia #explorepage #viralmalaysia #ootdmalaysia #selfiemalaysia #malaysiagirl",
+      fb: "#fbviralmalaysia #facebookmalaysia #viralmalaysia #captionfb #fotomalaysia #trendingmalaysia"
+    }
+  },
+  TH: {
+    label: "ภาษาไทย",
+    locale: "Thailand",
+    style: "ภาษาไทยสไตล์โซเชียล IG/FB, เป็นธรรมชาติ, ขี้เล่น, ไม่เป็นทางการ, ใช้คำไทยวัยรุ่นแบบสุภาพ",
+    examples: [
+      "มองเฉย ๆ ไม่ทักหน่อยเหรอ 🤭",
+      "ลุคใส ๆ แต่ทำใจสั่นนะ 😌✨",
+      "ยิ้มให้แล้วนะ ห้ามใจละลาย 😝"
+    ],
+    hashtagHints: {
+      ig: "#ฟีด #ติดเทรนด์ #ไวรัล #สาวไทย #น่ารัก #ถ่ายรูป #ไอจีไทย",
+      fb: "#เฟซบุ๊กไวรัล #โพสต์เฟซบุ๊ก #ไวรัลไทย #แคปชั่นเฟซบุ๊ก #รูปวันนี้"
+    }
+  },
+  VI: {
+    label: "Tiếng Việt",
+    locale: "Vietnam",
+    style: "tiếng Việt mạng xã hội tự nhiên, trẻ trung, thả thính nhẹ, không trang trọng, đúng vibe IG/FB Việt Nam",
+    examples: [
+      "nhìn thôi à, không định chào sao 🤭",
+      "ngoài thì dịu, trong thì hơi nguy hiểm 😌✨",
+      "cười nhẹ một cái cho ai đó mất tập trung 😝"
+    ],
+    hashtagHints: {
+      ig: "#xuhuong #viral #fyp #gaixinh #vietnam #selfie #instavietnam",
+      fb: "#facebookviral #xuhuongfacebook #viralvietnam #captionfacebook #anhdep #homnay"
+    }
+  }
 };
 
+function buildPrompt(lang) {
+  const profile = LANG_PROFILES[lang] || LANG_PROFILES.ID;
+  const today = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Jakarta",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(new Date());
+
+  return `You are an expert IG/FB social caption writer. Analyze the image and write captions in ${profile.label} for ${profile.locale}.
+
+TODAY: ${today}
+LANGUAGE STYLE: ${profile.style}
+
+Main goal:
+- Captions must feel like real social media captions, not formal copywriting.
+- Short, punchy, flirty/playful, natural, and photo-aware.
+- Avoid stiff, corporate, poetic, or over-explained language.
+- Use correct spelling, punctuation, and native phrasing for ${profile.label}.
+- Use 1-3 fitting emojis per caption.
+- Do not mention AI, image analysis, or that you are reading a photo.
+- Do not use sexual explicit language, minors, or adult-service wording.
+
+Output structure: EXACTLY 6 recommendations.
+1-2: very strong hook captions; highly attention-grabbing.
+3-4: captions adjusted to the photo mood, outfit, expression, and vibe.
+5: Instagram caption with hashtags. Put the caption text first, then exactly ONE newline, then IG hashtags.
+6: Facebook caption with hashtags. Put the caption text first, then exactly ONE newline, then FB hashtags.
+
+Hashtag rules:
+- Use hashtags that feel currently popular and locally relevant for ${profile.locale} as of TODAY.
+- IG hashtag direction: ${profile.hashtagHints.ig}
+- FB hashtag direction: ${profile.hashtagHints.fb}
+- Match hashtags to the selected language and photo content.
+- For #5 use IG-style hashtags only.
+- For #6 use FB-style hashtags only.
+- Keep hashtags readable; 5-8 hashtags per caption.
+
+Example tone references:
+${profile.examples.map((x) => `- ${x}`).join("\n")}
+
+Return ONLY valid JSON, no markdown, no explanation:
+{"captions":["caption 1","caption 2","caption 3","caption 4","caption 5\\n#hashtag #hashtag","caption 6\\n#hashtag #hashtag"]}`;
+}
+
+function stripCodeFence(text) {
+  return String(text || "")
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/```$/i, "")
+    .trim();
+}
+
+function cleanCaption(text) {
+  return String(text || "")
+    .replace(/^\s*[-*•]+\s*/gm, "")
+    .replace(/^\s*\d+[.)]\s*/gm, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function parseCaptions(rawText) {
+  const text = stripCodeFence(rawText);
+
+  try {
+    const parsed = JSON.parse(text);
+    if (Array.isArray(parsed?.captions)) {
+      return parsed.captions.map(cleanCaption).filter(Boolean).slice(0, 6);
+    }
+  } catch (_) {}
+
+  // Fallback: split numbered blocks while preserving one newline inside hashtag captions.
+  const numbered = text
+    .split(/(?:^|\n)\s*(?:\d+[.)]|[-*•])\s+/)
+    .map(cleanCaption)
+    .filter(Boolean);
+  if (numbered.length >= 6) return numbered.slice(0, 6);
+
+  return text
+    .split(/\n{2,}/)
+    .map(cleanCaption)
+    .filter(Boolean)
+    .slice(0, 6);
+}
+
 exports.handler = async (event) => {
-  // CORS headers
   const headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type",
@@ -63,10 +169,7 @@ exports.handler = async (event) => {
     "Content-Type": "application/json"
   };
 
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 204, headers, body: "" };
-  }
-
+  if (event.httpMethod === "OPTIONS") return { statusCode: 204, headers, body: "" };
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
   }
@@ -76,24 +179,22 @@ exports.handler = async (event) => {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: "GROQ_API_KEY belum diset di Netlify Environment Variables!" })
+      body: JSON.stringify({ error: "GROQ_API_KEY belum diset di Netlify Environment Variables." })
     };
   }
 
   let body;
   try {
-    body = JSON.parse(event.body);
+    body = JSON.parse(event.body || "{}");
   } catch {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid JSON body" }) };
   }
 
   const { imageBase64, imageType = "image/jpeg", lang = "ID" } = body;
-
   if (!imageBase64) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "imageBase64 is required" }) };
   }
 
-  const systemPrompt = PROMPTS[lang] || PROMPTS["ID"];
   const imageUrl = `data:${imageType};base64,${imageBase64}`;
 
   try {
@@ -109,13 +210,14 @@ exports.handler = async (event) => {
           {
             role: "user",
             content: [
-              { type: "text", text: systemPrompt },
+              { type: "text", text: buildPrompt(lang) },
               { type: "image_url", image_url: { url: imageUrl } }
             ]
           }
         ],
-        max_tokens: 600,
-        temperature: 0.9
+        max_tokens: 900,
+        temperature: 0.95,
+        response_format: { type: "json_object" }
       })
     });
 
@@ -127,24 +229,17 @@ exports.handler = async (event) => {
 
     const groqData = await groqRes.json();
     const rawText = groqData?.choices?.[0]?.message?.content || "";
+    const captions = parseCaptions(rawText);
 
-    // Parse captions: split by newlines, clean empty lines
-    const captions = rawText
-      .split("\n")
-      .map(line => line.trim())
-      .filter(line => line.length > 0 && line.length < 300)
-      .slice(0, 5);
-
-    if (captions.length === 0) {
-      throw new Error("Tidak ada caption yang dihasilkan.");
+    if (captions.length < 6) {
+      throw new Error("Output kurang dari 6 caption. Coba generate ulang.");
     }
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ captions })
+      body: JSON.stringify({ captions: captions.slice(0, 6) })
     };
-
   } catch (err) {
     return {
       statusCode: 500,

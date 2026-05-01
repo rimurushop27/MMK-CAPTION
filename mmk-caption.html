@@ -2,1021 +2,728 @@
 <html lang="id" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#111111" />
   <title>MMK-CAPTION</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Noto+Sans:wght@400;600;700;800;900&family=Noto+Sans+Thai:wght@400;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    /* ===== DESIGN TOKENS ===== */
     :root {
-      --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
-      --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
-      --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
-      --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
-      --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
-      --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
-
-      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
-      --space-4: 1rem;    --space-5: 1.25rem; --space-6: 1.5rem;
-      --space-8: 2rem;    --space-10: 2.5rem; --space-12: 3rem;
-      --space-16: 4rem;
-
-      --radius-sm: 0.375rem; --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;  --radius-xl: 1rem; --radius-full: 9999px;
-
-      --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
-
-      --font-display: 'Syne', sans-serif;
-      --font-body: 'Space Grotesk', sans-serif;
-    }
-
-    /* ===== DARK MODE (default) ===== */
-    :root, [data-theme="dark"] {
-      --color-bg:             #0f0a14;
-      --color-surface:        #16101e;
-      --color-surface-2:      #1e1528;
-      --color-surface-offset: #261c32;
-      --color-border:         #3a2a4a;
-      --color-divider:        #2a1f38;
-      --color-text:           #f0eaf8;
-      --color-text-muted:     #9d8bb5;
-      --color-text-faint:     #5c4d70;
-      --color-text-inverse:   #0f0a14;
-
-      /* Violet + Pink accent */
-      --color-primary:        #a855f7;
-      --color-primary-hover:  #9333ea;
-      --color-primary-active: #7c22ce;
-      --color-primary-glow:   rgba(168, 85, 247, 0.25);
-
-      --color-pink:           #ec4899;
-      --color-pink-hover:     #db2777;
-      --color-pink-glow:      rgba(236, 72, 153, 0.25);
-
-      --color-accent-gradient: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
-      --color-accent-gradient-hover: linear-gradient(135deg, #9333ea 0%, #db2777 100%);
-
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
-      --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
-      --shadow-lg: 0 12px 32px rgba(0,0,0,0.6);
-      --shadow-glow: 0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(236, 72, 153, 0.15);
+      --bg: #111111;
+      --ink: #f8f4e8;
+      --muted: #beb7a7;
+      --panel: #fff1c7;
+      --panel-2: #f7f7f7;
+      --black: #111111;
+      --pink: #ff4da6;
+      --yellow: #ffe100;
+      --cyan: #43e8ff;
+      --green: #74ff8b;
+      --purple: #a777ff;
+      --red: #ff5a5f;
+      --shadow: 6px 6px 0 #000;
+      --shadow-sm: 4px 4px 0 #000;
+      --radius: 22px;
+      --radius-sm: 14px;
+      --font-ui: 'Noto Sans', 'Noto Sans Thai', system-ui, sans-serif;
+      --font-display: 'Archivo Black', 'Noto Sans Thai', sans-serif;
     }
 
     [data-theme="light"] {
-      --color-bg:             #fdf4ff;
-      --color-surface:        #fef7ff;
-      --color-surface-2:      #fce8ff;
-      --color-surface-offset: #f3d8ff;
-      --color-border:         #d8b4fe;
-      --color-divider:        #e9d5ff;
-      --color-text:           #2d1a42;
-      --color-text-muted:     #6b4d8a;
-      --color-text-faint:     #b08fd6;
-      --color-text-inverse:   #fdf4ff;
-
-      --color-primary:        #9333ea;
-      --color-primary-hover:  #7c22ce;
-      --color-primary-active: #6b21a8;
-      --color-primary-glow:   rgba(147, 51, 234, 0.2);
-
-      --color-pink:           #db2777;
-      --color-pink-hover:     #be185d;
-      --color-pink-glow:      rgba(219, 39, 119, 0.2);
-
-      --color-accent-gradient: linear-gradient(135deg, #9333ea 0%, #db2777 100%);
-      --color-accent-gradient-hover: linear-gradient(135deg, #7c22ce 0%, #be185d 100%);
-
-      --shadow-sm: 0 1px 2px rgba(100, 20, 150, 0.08);
-      --shadow-md: 0 4px 12px rgba(100, 20, 150, 0.12);
-      --shadow-lg: 0 12px 32px rgba(100, 20, 150, 0.18);
-      --shadow-glow: 0 0 20px rgba(147, 51, 234, 0.2), 0 0 40px rgba(219, 39, 119, 0.1);
+      --bg: #ffe8f3;
+      --ink: #111111;
+      --muted: #4e4e4e;
+      --panel: #fff8d7;
+      --panel-2: #ffffff;
+      --shadow: 6px 6px 0 #111;
+      --shadow-sm: 4px 4px 0 #111;
     }
 
-    /* ===== BASE ===== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html {
-      -webkit-text-size-adjust: none;
-      text-size-adjust: none;
-      -webkit-font-smoothing: antialiased;
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
       min-height: 100dvh;
-      font-family: var(--font-body);
-      font-size: var(--text-base);
-      color: var(--color-text);
-      background-color: var(--color-bg);
-      line-height: 1.6;
-    }
-    img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
-    input, button, textarea, select { font: inherit; color: inherit; }
-    button { cursor: pointer; background: none; border: none; }
-    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
-
-    a, button, [role="button"], input, textarea, select {
-      transition: color var(--transition-interactive), background var(--transition-interactive),
-                  border-color var(--transition-interactive), box-shadow var(--transition-interactive),
-                  transform var(--transition-interactive), opacity var(--transition-interactive);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
-    /* ===== LAYOUT ===== */
-    .app-wrapper {
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: var(--space-4);
-      padding-bottom: var(--space-12);
-      position: relative;
+      font-family: var(--font-ui);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 16% 8%, rgba(255,77,166,.32), transparent 26%),
+        radial-gradient(circle at 88% 18%, rgba(67,232,255,.26), transparent 30%),
+        linear-gradient(135deg, var(--bg), #171717 58%, #261327);
+      line-height: 1.45;
       overflow-x: hidden;
     }
+    [data-theme="light"] body {
+      background:
+        radial-gradient(circle at 16% 8%, rgba(255,77,166,.35), transparent 26%),
+        radial-gradient(circle at 88% 18%, rgba(67,232,255,.45), transparent 30%),
+        linear-gradient(135deg, #ffe8f3, #fff7c2 58%, #e7faff);
+    }
+    button, input { font: inherit; color: inherit; }
+    button { cursor: pointer; border: 0; background: none; }
+    img { max-width: 100%; display: block; }
+    :focus-visible { outline: 4px solid var(--cyan); outline-offset: 3px; }
 
-    /* Neo-brutalism background pattern */
-    .app-wrapper::before {
+    .page {
+      width: min(100%, 520px);
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: 14px 14px 34px;
+      position: relative;
+    }
+
+    .page::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image:
-        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(168, 85, 247, 0.15) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
       pointer-events: none;
-      z-index: 0;
+      opacity: .28;
+      background-image:
+        linear-gradient(var(--ink) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ink) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: linear-gradient(to bottom, #000, transparent 70%);
     }
 
-    .container {
-      width: 100%;
-      max-width: 480px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ===== HEADER ===== */
-    .header {
-      width: 100%;
-      max-width: 480px;
+    .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: var(--space-4) 0 var(--space-8);
+      gap: 12px;
+      padding: 8px 0 16px;
       position: relative;
       z-index: 1;
     }
-
-    .logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-    }
-
-    .logo-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--color-accent-gradient);
-      border-radius: var(--radius-lg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--shadow-glow);
-      /* Neo-brutalism: thick border + offset shadow */
-      border: 2px solid var(--color-text);
-      position: relative;
-    }
-    .logo-icon::after {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: inherit;
-      border: 2px solid var(--color-text);
-      transform: translate(3px, 3px);
-      z-index: -1;
-      background: var(--color-text-faint);
-      opacity: 0.3;
-    }
-
-    .logo-text {
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--black);
+      border-radius: 16px;
+      background: var(--yellow);
+      color: var(--black);
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      place-items: center;
       font-family: var(--font-display);
-      font-size: var(--text-xl);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      background: var(--color-accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: 20px;
+      transform: rotate(-3deg);
     }
-
-    .theme-toggle {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-md);
-      background: var(--color-surface);
-      border: 2px solid var(--color-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-text-muted);
-      /* Neo-brutalism offset shadow */
-      box-shadow: 2px 2px 0 var(--color-border);
-    }
-    .theme-toggle:hover {
-      background: var(--color-surface-2);
-      color: var(--color-text);
-      transform: translate(-1px, -1px);
-      box-shadow: 3px 3px 0 var(--color-border);
-    }
-    .theme-toggle:active {
-      transform: translate(1px, 1px);
-      box-shadow: 1px 1px 0 var(--color-border);
-    }
-
-    /* ===== CARD BASE (Neo-Brutalism) ===== */
-    .card {
-      background: var(--color-surface);
-      border: 2px solid var(--color-border);
-      border-radius: var(--radius-xl);
-      box-shadow: 4px 4px 0 var(--color-border);
-      padding: var(--space-5);
-      margin-bottom: var(--space-5);
-    }
-
-    .card-title {
+    .brand-title {
       font-family: var(--font-display);
-      font-size: var(--text-sm);
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      font-size: clamp(22px, 7vw, 34px);
+      letter-spacing: -1.5px;
+      line-height: .9;
       text-transform: uppercase;
-      color: var(--color-text-muted);
-      margin-bottom: var(--space-4);
-      display: flex;
-      align-items: center;
-      gap: var(--space-2);
+      text-shadow: 3px 3px 0 #000;
     }
-    .card-title svg { color: var(--color-primary); }
+    [data-theme="light"] .brand-title { text-shadow: 3px 3px 0 #fff; }
+    .theme-toggle {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--black);
+      border-radius: 15px;
+      background: var(--cyan);
+      color: var(--black);
+      box-shadow: var(--shadow-sm);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .theme-toggle:active { transform: translate(3px,3px); box-shadow: 1px 1px 0 #000; }
 
-    /* ===== UPLOAD ZONE ===== */
-    .upload-zone {
-      border: 2px dashed var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-8) var(--space-4);
-      text-align: center;
-      cursor: pointer;
-      transition: all var(--transition-interactive);
+    .hero {
       position: relative;
+      z-index: 1;
+      border: 3px solid var(--black);
+      border-radius: 28px;
+      background: var(--panel);
+      color: var(--black);
+      box-shadow: var(--shadow);
+      padding: 18px;
       overflow: hidden;
-      background: var(--color-surface-2);
+      margin-bottom: 16px;
     }
-    .upload-zone:hover, .upload-zone.drag-over {
-      border-color: var(--color-primary);
-      background: color-mix(in oklch, var(--color-primary) 8%, var(--color-surface-2));
-      box-shadow: 0 0 0 4px var(--color-primary-glow);
-    }
-    .upload-zone input[type="file"] {
+    .hero::after {
+      content: 'SOCIAL MODE';
       position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-      width: 100%;
-      height: 100%;
+      right: -34px;
+      top: 24px;
+      rotate: 18deg;
+      font-family: var(--font-display);
+      font-size: 18px;
+      background: var(--pink);
+      border: 3px solid var(--black);
+      padding: 8px 28px;
+      color: #fff;
     }
-    .upload-icon {
-      width: 52px;
-      height: 52px;
-      background: var(--color-accent-gradient);
-      border-radius: var(--radius-full);
-      display: flex;
+    .kicker {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      margin: 0 auto var(--space-4);
-      border: 2px solid var(--color-text);
-      box-shadow: 3px 3px 0 var(--color-border);
+      gap: 8px;
+      border: 3px solid var(--black);
+      border-radius: 999px;
+      background: var(--green);
+      color: var(--black);
+      padding: 6px 10px;
+      box-shadow: 3px 3px 0 #000;
+      font-weight: 900;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
     }
-    .upload-text-main {
-      font-weight: 700;
-      font-size: var(--text-base);
-      color: var(--color-text);
-      margin-bottom: var(--space-1);
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 11vw, 56px);
+      line-height: .88;
+      letter-spacing: -2px;
+      max-width: 9ch;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
-    .upload-text-sub {
-      font-size: var(--text-xs);
-      color: var(--color-text-muted);
+    .hero p {
+      max-width: 32ch;
+      font-weight: 800;
+      color: #2a2a2a;
+      font-size: 14px;
     }
 
-    /* ===== IMAGE PREVIEW ===== */
-    .preview-wrap {
-      display: none;
+    .card {
       position: relative;
-      border-radius: var(--radius-lg);
+      z-index: 1;
+      border: 3px solid var(--black);
+      border-radius: var(--radius);
+      background: var(--panel-2);
+      color: var(--black);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: -.2px;
+      font-size: 14px;
+    }
+    .section-title span:last-child {
+      background: var(--yellow);
+      border: 2px solid var(--black);
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 11px;
+      box-shadow: 2px 2px 0 #000;
+      white-space: nowrap;
+    }
+
+    .upload-zone {
+      min-height: 188px;
+      border: 3px dashed var(--black);
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(255,225,0,.5), rgba(67,232,255,.36)),
+        #fff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 22px;
+      position: relative;
       overflow: hidden;
-      border: 2px solid var(--color-border);
-      box-shadow: 3px 3px 0 var(--color-border);
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
     }
+    .upload-zone.drag-over, .upload-zone:hover {
+      transform: translate(-2px,-2px);
+      box-shadow: var(--shadow-sm);
+      background:
+        linear-gradient(135deg, rgba(255,77,166,.35), rgba(116,255,139,.4)),
+        #fff;
+    }
+    .upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .upload-badge {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 12px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--black);
+      border-radius: 22px;
+      background: var(--pink);
+      color: #fff;
+      box-shadow: var(--shadow-sm);
+      transform: rotate(4deg);
+    }
+    .upload-main { font-family: var(--font-display); font-size: 22px; line-height: 1; margin-bottom: 6px; }
+    .upload-sub { font-weight: 800; font-size: 12px; color: #555; }
+
+    .preview-wrap { display: none; position: relative; overflow: hidden; border: 3px solid var(--black); border-radius: 20px; box-shadow: var(--shadow-sm); }
     .preview-wrap.visible { display: block; }
-    .preview-img {
-      width: 100%;
-      max-height: 280px;
-      object-fit: cover;
-      display: block;
-    }
+    .preview-img { width: 100%; max-height: 330px; object-fit: cover; background: #ddd; }
     .preview-remove {
       position: absolute;
-      top: var(--space-2);
-      right: var(--space-2);
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-full);
-      background: var(--color-bg);
-      border: 2px solid var(--color-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-text-muted);
-      box-shadow: 2px 2px 0 var(--color-border);
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--black);
+      border-radius: 14px;
+      background: var(--red);
+      color: #fff;
+      box-shadow: 3px 3px 0 #000;
     }
-    .preview-remove:hover { color: var(--color-pink); }
 
-    /* ===== LANGUAGE SELECTOR ===== */
-    .lang-group {
-      display: flex;
-      gap: var(--space-2);
-    }
+    .lang-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
     .lang-btn {
-      flex: 1;
-      padding: var(--space-3) var(--space-2);
-      border-radius: var(--radius-lg);
-      font-weight: 700;
-      font-size: var(--text-sm);
-      letter-spacing: 0.04em;
-      border: 2px solid var(--color-border);
-      background: var(--color-surface-2);
-      color: var(--color-text-muted);
-      text-align: center;
-      box-shadow: 2px 2px 0 var(--color-border);
-      transition: all var(--transition-interactive);
+      min-height: 68px;
+      border: 3px solid var(--black);
+      border-radius: 16px;
+      background: #fff;
+      color: var(--black);
+      box-shadow: 3px 3px 0 #000;
+      font-weight: 950;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
     }
-    .lang-btn:hover {
-      color: var(--color-text);
-      border-color: var(--color-primary);
-      transform: translate(-1px, -1px);
-      box-shadow: 3px 3px 0 var(--color-primary);
-    }
-    .lang-btn:active {
-      transform: translate(1px, 1px);
-      box-shadow: 1px 1px 0 var(--color-primary);
-    }
-    .lang-btn.active {
-      background: var(--color-accent-gradient);
-      border-color: var(--color-text);
-      color: white;
-      box-shadow: 3px 3px 0 var(--color-text);
-      transform: none;
-    }
-    .lang-flag {
-      display: block;
-      font-size: 1.4em;
-      line-height: 1;
-      margin-bottom: 2px;
-    }
-    .lang-code {
-      display: block;
-      font-size: var(--text-xs);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-    }
+    .lang-btn:active { transform: translate(3px,3px); box-shadow: 1px 1px 0 #000; }
+    .lang-btn.active { background: var(--cyan); transform: translate(-1px,-1px); box-shadow: 5px 5px 0 #000; }
+    .lang-flag { display: block; font-size: 24px; line-height: 1; margin-bottom: 4px; }
+    .lang-code { display: block; font-family: 'Space Grotesk', var(--font-ui); font-size: 12px; }
 
-    /* ===== GENERATE BUTTON ===== */
     .btn-generate {
+      position: sticky;
+      bottom: 12px;
+      z-index: 5;
       width: 100%;
-      padding: var(--space-4) var(--space-6);
-      border-radius: var(--radius-xl);
-      font-family: var(--font-display);
-      font-size: var(--text-base);
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      background: var(--color-accent-gradient);
-      color: white;
-      border: 2px solid var(--color-text);
-      box-shadow: 4px 4px 0 var(--color-text);
-      transition: all var(--transition-interactive);
+      min-height: 60px;
+      border: 3px solid var(--black);
+      border-radius: 20px;
+      background: var(--pink);
+      color: #fff;
+      box-shadow: var(--shadow);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: var(--space-3);
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 19px;
       text-transform: uppercase;
+      margin-bottom: 16px;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
     }
-    .btn-generate:hover:not(:disabled) {
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0 var(--color-text);
-      background: var(--color-accent-gradient-hover);
-    }
-    .btn-generate:active:not(:disabled) {
-      transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 var(--color-text);
-    }
-    .btn-generate:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
+    .btn-generate:not(:disabled):active { transform: translate(5px,5px); box-shadow: 1px 1px 0 #000; }
+    .btn-generate:disabled { opacity: .55; cursor: not-allowed; filter: grayscale(.35); }
 
-    /* ===== RESULTS AREA ===== */
-    .results-card {
-      background: var(--color-surface);
-      border: 2px solid var(--color-border);
-      border-radius: var(--radius-xl);
-      box-shadow: 4px 4px 0 var(--color-border);
-      min-height: 200px;
-      overflow: hidden;
-    }
-
-    .results-header {
-      padding: var(--space-4) var(--space-5);
-      border-bottom: 2px solid var(--color-border);
+    .results-card { padding: 0; overflow: hidden; }
+    .results-head {
+      padding: 14px;
+      border-bottom: 3px solid var(--black);
+      background: var(--yellow);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 10px;
     }
-    .results-title {
-      font-family: var(--font-display);
-      font-size: var(--text-sm);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-      display: flex;
-      align-items: center;
-      gap: var(--space-2);
-    }
-    .results-title svg { color: var(--color-pink); }
+    .results-title { font-family: var(--font-display); text-transform: uppercase; letter-spacing: -.7px; }
+    .results-badge { font-size: 12px; font-weight: 950; background: #fff; border: 2px solid #000; border-radius: 999px; padding: 4px 8px; box-shadow: 2px 2px 0 #000; }
 
-    /* ===== EMPTY STATE ===== */
-    .empty-state {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: var(--space-12) var(--space-8);
-      color: var(--color-text-faint);
+    .empty-state, .loading-state, .error-state { padding: 34px 16px; text-align: center; }
+    .empty-state p, .loading-text { font-weight: 850; color: #444; }
+    .empty-icon, .spinner {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 14px;
+      border: 3px solid #000;
+      border-radius: 18px;
+      background: var(--cyan);
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      place-items: center;
+      font-size: 26px;
     }
-    .empty-state-icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto var(--space-4);
-      opacity: 0.4;
-    }
-    .empty-state p {
-      font-size: var(--text-sm);
-      color: var(--color-text-faint);
-      max-width: 28ch;
-    }
+    .loading-state { display: none; }
+    .loading-state.visible { display: block; }
+    .spinner { border-radius: 50%; border-top-color: var(--pink); animation: spin .8s linear infinite; }
+    @keyframes spin { to { rotate: 360deg; } }
+    .error-state { display: none; }
+    .error-state.visible { display: block; }
+    .error-msg { border: 3px solid #000; border-radius: 18px; background: #ffe0e0; box-shadow: var(--shadow-sm); padding: 14px; font-weight: 900; color: #9b1111; }
 
-    /* ===== LOADING STATE ===== */
-    .loading-state {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: var(--space-12) var(--space-8);
-      gap: var(--space-4);
-    }
-    .loading-state.visible { display: flex; }
-
-    .loading-spinner {
-      width: 44px;
-      height: 44px;
-      border: 3px solid var(--color-border);
-      border-top-color: var(--color-primary);
-      border-right-color: var(--color-pink);
-      border-radius: var(--radius-full);
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .loading-text {
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
-      font-weight: 500;
-    }
-    .loading-dots span {
-      display: inline-block;
-      animation: dot-pulse 1.4s ease-in-out infinite;
-      opacity: 0;
-    }
-    .loading-dots span:nth-child(1) { animation-delay: 0s; }
-    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes dot-pulse {
-      0%, 80%, 100% { opacity: 0; transform: scale(0.8); }
-      40% { opacity: 1; transform: scale(1); }
-    }
-
-    /* ===== CAPTIONS LIST ===== */
-    .captions-list {
-      display: none;
-      flex-direction: column;
-      padding: var(--space-4) var(--space-5);
-      gap: var(--space-3);
-    }
+    .captions-list { display: none; flex-direction: column; gap: 12px; padding: 14px; }
     .captions-list.visible { display: flex; }
-
     .caption-item {
-      background: var(--color-surface-2);
-      border: 2px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-4) var(--space-4);
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-3);
-      box-shadow: 2px 2px 0 var(--color-border);
-      position: relative;
-      animation: slide-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+      display: grid;
+      grid-template-columns: 34px 1fr 42px;
+      gap: 10px;
+      align-items: start;
+      border: 3px solid var(--black);
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: var(--shadow-sm);
+      padding: 12px;
+      animation: pop .22s ease both;
     }
-    .caption-item:nth-child(1) { animation-delay: 0.05s; }
-    .caption-item:nth-child(2) { animation-delay: 0.10s; }
-    .caption-item:nth-child(3) { animation-delay: 0.15s; }
-    .caption-item:nth-child(4) { animation-delay: 0.20s; }
-    .caption-item:nth-child(5) { animation-delay: 0.25s; }
-
-    @keyframes slide-in {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
+    .caption-item:nth-child(2n) { background: #f1fcff; }
+    .caption-item:nth-child(3n) { background: #fff4fb; }
     .caption-number {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      border-radius: var(--radius-full);
-      background: var(--color-accent-gradient);
-      color: white;
-      font-size: var(--text-xs);
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1.5px solid rgba(255,255,255,0.3);
-      margin-top: 2px;
-    }
-
-    .caption-text {
-      flex: 1;
-      font-size: var(--text-base);
-      color: var(--color-text);
-      line-height: 1.5;
-      word-break: break-word;
-      white-space: pre-line;
-    }
-
-    .copy-btn {
-      flex-shrink: 0;
       width: 34px;
       height: 34px;
-      border-radius: var(--radius-md);
-      border: 2px solid var(--color-border);
-      background: var(--color-surface-offset);
-      color: var(--color-text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 2px 2px 0 var(--color-border);
-      margin-top: -2px;
+      border: 3px solid #000;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: #000;
+      font-family: var(--font-display);
+      box-shadow: 2px 2px 0 #000;
     }
-    .copy-btn:hover {
-      border-color: var(--color-primary);
-      color: var(--color-primary);
-      transform: translate(-1px, -1px);
-      box-shadow: 3px 3px 0 var(--color-primary);
+    .caption-text {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.42;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
     }
-    .copy-btn:active {
-      transform: translate(1px, 1px);
-      box-shadow: 1px 1px 0 var(--color-primary);
+    .caption-tag {
+      display: inline-block;
+      margin-bottom: 7px;
+      border: 2px solid #000;
+      border-radius: 999px;
+      padding: 2px 7px;
+      background: var(--yellow);
+      font-size: 10px;
+      font-weight: 950;
+      text-transform: uppercase;
+      box-shadow: 2px 2px 0 #000;
     }
-    .copy-btn.copied {
-      border-color: #22c55e;
-      color: #22c55e;
-      box-shadow: 2px 2px 0 #22c55e;
+    .copy-btn {
+      width: 42px;
+      height: 42px;
+      border: 3px solid #000;
+      border-radius: 14px;
+      background: var(--purple);
+      color: #fff;
+      box-shadow: 3px 3px 0 #000;
+      display: grid;
+      place-items: center;
     }
+    .copy-btn.copied { background: var(--green); color: #000; }
+    @keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
 
-    /* ===== ERROR STATE ===== */
-    .error-state {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: var(--space-8);
-      gap: var(--space-3);
+    .note {
+      margin-top: 10px;
+      border: 3px solid #000;
+      border-radius: 18px;
+      background: #eafff0;
+      color: #111;
+      box-shadow: var(--shadow-sm);
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 850;
     }
-    .error-state.visible { display: flex; }
-    .error-msg {
-      font-size: var(--text-sm);
-      color: #f87171;
-      background: rgba(248, 113, 113, 0.1);
-      border: 2px solid rgba(248, 113, 113, 0.3);
-      border-radius: var(--radius-lg);
-      padding: var(--space-3) var(--space-4);
-      width: 100%;
-    }
+    .footer { position: relative; z-index: 1; padding: 10px 4px 0; text-align: center; color: var(--muted); font-size: 12px; font-weight: 800; }
+    .footer b { color: var(--ink); }
 
-    /* ===== FOOTER ===== */
-    .footer {
-      text-align: center;
-      margin-top: var(--space-6);
-      font-size: var(--text-xs);
-      color: var(--color-text-faint);
+    @media (max-width: 380px) {
+      .page { padding-inline: 10px; }
+      .lang-grid { gap: 6px; }
+      .lang-btn { min-height: 62px; border-width: 2px; }
+      .lang-flag { font-size: 20px; }
+      .caption-item { grid-template-columns: 30px 1fr; }
+      .copy-btn { grid-column: 2; width: 100%; height: 38px; }
     }
-    .footer span {
-      background: var(--color-accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: 700;
-    }
-
-    /* ===== NETLIFY ENV NOTICE ===== */
-    .env-notice {
-      display: none;
-      background: rgba(168, 85, 247, 0.1);
-      border: 2px solid rgba(168, 85, 247, 0.3);
-      border-radius: var(--radius-lg);
-      padding: var(--space-3) var(--space-4);
-      font-size: var(--text-xs);
-      color: var(--color-text-muted);
-      text-align: center;
-      margin-bottom: var(--space-4);
-    }
-    .env-notice.visible { display: block; }
-
-    /* ===== SCROLLBAR ===== */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--color-surface); }
-    ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: var(--radius-full); }
-    ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
-
   </style>
 </head>
 <body>
-
-<div class="app-wrapper">
-
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo-wrap">
-      <div class="logo-icon" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M7 8h10M7 12h6M3 20l1.3-3.9A7 7 0 1 1 12 19"/>
-          <circle cx="19" cy="19" r="3"/>
-          <path d="M19 17v2l1 1"/>
-        </svg>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand" aria-label="MMK-CAPTION">
+        <div class="brand-mark">M</div>
+        <div class="brand-title">MMK<br>CAPTION</div>
       </div>
-      <span class="logo-text">MMK-CAPTION</span>
-    </div>
-    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-      </svg>
-    </button>
-  </header>
+      <button class="theme-toggle" data-theme-toggle aria-label="Ganti mode terang atau gelap">☾</button>
+    </header>
 
-  <main class="container">
+    <section class="hero">
+      <div class="kicker">⚡ 6 caption sekali generate</div>
+      <h1>Caption yang lebih liar.</h1>
+      <p>Upload foto, pilih bahasa, lalu dapatkan caption IG/FB yang lebih natural, punchy, dan berasa sosmed.</p>
+    </section>
 
-    <!-- ENV NOTICE -->
-    <div class="env-notice" id="envNotice">
-      ⚠️ API Key belum diset. Tambahkan <strong>GROQ_API_KEY</strong> di Netlify → Site Settings → Environment Variables.
-    </div>
-
-    <!-- UPLOAD CARD -->
-    <div class="card">
-      <div class="card-title">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
-        Upload Foto
-      </div>
-
-      <div class="upload-zone" id="uploadZone">
-        <input type="file" id="fileInput" accept="image/*" aria-label="Upload foto" />
-        <div class="upload-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    <main>
+      <section class="card">
+        <div class="section-title"><strong>1. Upload Foto</strong><span>JPG / PNG / WEBP</span></div>
+        <label class="upload-zone" id="uploadZone" for="fileInput">
+          <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" />
+          <div>
+            <div class="upload-badge" aria-hidden="true">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="upload-main">Tap / drop foto</div>
+            <div class="upload-sub">Maksimal 10 MB. Foto tidak disimpan di browser.</div>
+          </div>
+        </label>
+        <div class="preview-wrap" id="previewWrap">
+          <img class="preview-img" id="previewImg" alt="Preview foto yang diupload" />
+          <button class="preview-remove" id="removeBtn" aria-label="Hapus foto">✕</button>
         </div>
-        <p class="upload-text-main">Tap untuk upload foto 📸</p>
-        <p class="upload-text-sub">JPG, PNG, WEBP · Maks 10MB</p>
-      </div>
+      </section>
 
-      <div class="preview-wrap" id="previewWrap">
-        <img id="previewImg" class="preview-img" src="" alt="Preview foto" width="480" height="280" loading="lazy" />
-        <button class="preview-remove" id="removeBtn" aria-label="Hapus foto">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- LANGUAGE CARD -->
-    <div class="card">
-      <div class="card-title">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        Pilih Bahasa
-      </div>
-      <div class="lang-group" role="group" aria-label="Pilih bahasa caption">
-        <button class="lang-btn active" data-lang="ID" aria-pressed="true">
-          <span class="lang-flag">🇮🇩</span>
-          <span class="lang-code">ID</span>
-        </button>
-        <button class="lang-btn" data-lang="EN" aria-pressed="false">
-          <span class="lang-flag">🇬🇧</span>
-          <span class="lang-code">EN</span>
-        </button>
-        <button class="lang-btn" data-lang="MY" aria-pressed="false">
-          <span class="lang-flag">🇲🇾</span>
-          <span class="lang-code">MY</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- GENERATE BUTTON -->
-    <button class="btn-generate" id="generateBtn" disabled aria-label="Generate caption">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      Generate Caption
-    </button>
-
-    <!-- RESULTS CARD -->
-    <div class="results-card" id="resultsCard" aria-live="polite" aria-atomic="true">
-      <div class="results-header">
-        <div class="results-title">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Hasil Caption
+      <section class="card">
+        <div class="section-title"><strong>2. Pilih Bahasa</strong><span>Local style</span></div>
+        <div class="lang-grid" role="group" aria-label="Pilih bahasa caption">
+          <button class="lang-btn active" data-lang="ID" aria-pressed="true"><span class="lang-flag">🇮🇩</span><span class="lang-code">ID</span></button>
+          <button class="lang-btn" data-lang="EN" aria-pressed="false"><span class="lang-flag">🇬🇧</span><span class="lang-code">EN</span></button>
+          <button class="lang-btn" data-lang="MY" aria-pressed="false"><span class="lang-flag">🇲🇾</span><span class="lang-code">MY</span></button>
+          <button class="lang-btn" data-lang="TH" aria-pressed="false"><span class="lang-flag">🇹🇭</span><span class="lang-code">TH</span></button>
+          <button class="lang-btn" data-lang="VI" aria-pressed="false"><span class="lang-flag">🇻🇳</span><span class="lang-code">VI</span></button>
         </div>
-        <span id="resultsBadge" style="font-size:var(--text-xs);color:var(--color-text-faint);"></span>
-      </div>
+        <div class="note">Output: 1–2 hook parah, 3–4 caption menyesuaikan foto, 5 hashtag IG, 6 hashtag FB.</div>
+      </section>
 
-      <!-- Empty State -->
-      <div class="empty-state" id="emptyState">
-        <div class="empty-state-icon">
-          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="28" cy="28" r="26" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
-            <path d="M20 28 C20 22, 36 22, 36 28 C36 34, 20 34, 20 28Z" stroke="currentColor" stroke-width="2" fill="none"/>
-            <circle cx="24" cy="27" r="2" fill="currentColor"/>
-            <circle cx="32" cy="27" r="2" fill="currentColor"/>
-            <path d="M24 32 Q28 35 32 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-          </svg>
-        </div>
-        <p>Upload foto dulu, pilih bahasa, lalu tekan Generate ✨</p>
-      </div>
-
-      <!-- Loading State -->
-      <div class="loading-state" id="loadingState" aria-label="Sedang generate caption...">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">
-          Lagi analisa foto
-          <span class="loading-dots">
-            <span>.</span><span>.</span><span>.</span>
-          </span>
-        </div>
-      </div>
-
-      <!-- Error State -->
-      <div class="error-state" id="errorState">
-        <div class="error-msg" id="errorMsg"></div>
-      </div>
-
-      <!-- Captions List -->
-      <div class="captions-list" id="captionsList"></div>
-    </div>
-
-    <!-- FOOTER -->
-    <div class="footer">
-      Powered by <span>MMK-CAPTION</span> &times; Groq AI 💜
-    </div>
-
-  </main>
-</div>
-
-<script>
-/* =================== THEME TOGGLE =================== */
-(function(){
-  const t = document.querySelector('[data-theme-toggle]');
-  const r = document.documentElement;
-  let d = 'dark'; // default dark
-  r.setAttribute('data-theme', d);
-  const sunIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
-  const moonIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-  if (t) t.addEventListener('click', () => {
-    d = d === 'dark' ? 'light' : 'dark';
-    r.setAttribute('data-theme', d);
-    t.innerHTML = d === 'dark' ? moonIcon : sunIcon;
-  });
-})();
-
-/* =================== APP STATE =================== */
-let selectedLang = 'ID';
-let imageBase64 = null;
-let imageType = 'image/jpeg';
-
-const fileInput    = document.getElementById('fileInput');
-const uploadZone   = document.getElementById('uploadZone');
-const previewWrap  = document.getElementById('previewWrap');
-const previewImg   = document.getElementById('previewImg');
-const removeBtn    = document.getElementById('removeBtn');
-const generateBtn  = document.getElementById('generateBtn');
-const captionsList = document.getElementById('captionsList');
-const loadingState = document.getElementById('loadingState');
-const emptyState   = document.getElementById('emptyState');
-const errorState   = document.getElementById('errorState');
-const errorMsg     = document.getElementById('errorMsg');
-const resultsBadge = document.getElementById('resultsBadge');
-const envNotice    = document.getElementById('envNotice');
-
-/* =================== API KEY CHECK =================== */
-// Netlify injects env vars via _redirects or netlify.toml
-// We expose it via a Netlify Function (see netlify/functions/generate.js)
-// For direct HTML deployment, we use a function endpoint
-const API_ENDPOINT = '/.netlify/functions/generate';
-
-/* =================== UPLOAD LOGIC =================== */
-fileInput.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if (file) handleFile(file);
-});
-
-uploadZone.addEventListener('dragover', (e) => {
-  e.preventDefault();
-  uploadZone.classList.add('drag-over');
-});
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
-uploadZone.addEventListener('drop', (e) => {
-  e.preventDefault();
-  uploadZone.classList.remove('drag-over');
-  const file = e.dataTransfer.files[0];
-  if (file && file.type.startsWith('image/')) handleFile(file);
-});
-
-function handleFile(file) {
-  if (file.size > 10 * 1024 * 1024) {
-    showError('Ukuran file terlalu besar. Maks 10MB ya! 😅');
-    return;
-  }
-  imageType = file.type;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    const result = e.target.result;
-    // Extract base64 data
-    imageBase64 = result.split(',')[1];
-    previewImg.src = result;
-    uploadZone.style.display = 'none';
-    previewWrap.classList.add('visible');
-    generateBtn.disabled = false;
-    resetResults();
-  };
-  reader.readAsDataURL(file);
-}
-
-removeBtn.addEventListener('click', () => {
-  imageBase64 = null;
-  fileInput.value = '';
-  previewImg.src = '';
-  previewWrap.classList.remove('visible');
-  uploadZone.style.display = '';
-  generateBtn.disabled = true;
-  resetResults();
-});
-
-/* =================== LANGUAGE =================== */
-document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.lang-btn').forEach(b => {
-      b.classList.remove('active');
-      b.setAttribute('aria-pressed', 'false');
-    });
-    btn.classList.add('active');
-    btn.setAttribute('aria-pressed', 'true');
-    selectedLang = btn.dataset.lang;
-  });
-});
-
-/* =================== RESULTS HELPERS =================== */
-function resetResults() {
-  emptyState.style.display = '';
-  loadingState.classList.remove('visible');
-  errorState.classList.remove('visible');
-  captionsList.classList.remove('visible');
-  captionsList.innerHTML = '';
-  resultsBadge.textContent = '';
-}
-
-function showError(msg) {
-  emptyState.style.display = 'none';
-  loadingState.classList.remove('visible');
-  captionsList.classList.remove('visible');
-  errorMsg.textContent = msg;
-  errorState.classList.add('visible');
-}
-
-function showLoading() {
-  emptyState.style.display = 'none';
-  errorState.classList.remove('visible');
-  captionsList.classList.remove('visible');
-  loadingState.classList.add('visible');
-}
-
-function showCaptions(captions) {
-  loadingState.classList.remove('visible');
-  emptyState.style.display = 'none';
-  captionsList.innerHTML = '';
-
-  captions.forEach((caption, i) => {
-    const item = document.createElement('div');
-    item.className = 'caption-item';
-    item.innerHTML = `
-      <div class="caption-number" aria-hidden="true">${i + 1}</div>
-      <div class="caption-text">${escapeHtml(caption)}</div>
-      <button class="copy-btn" data-caption="${escapeAttr(caption)}" aria-label="Copy caption ${i+1}" title="Salin caption">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <button class="btn-generate" id="generateBtn" disabled>
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7"><path d="M13 2L3 14h8l-1 8 11-14h-8l0-6z"/></svg>
+        Generate Caption
       </button>
-    `;
-    captionsList.appendChild(item);
-  });
 
-  resultsBadge.textContent = `${captions.length} caption`;
-  captionsList.classList.add('visible');
-}
+      <section class="card results-card" aria-live="polite" aria-atomic="true">
+        <div class="results-head">
+          <div class="results-title">Hasil Caption</div>
+          <div class="results-badge" id="resultsBadge">Ready</div>
+        </div>
 
-function escapeHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-function escapeAttr(str) {
-  return str.replace(/"/g,'&quot;').replace(/\n/g,'\\n');
-}
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">📸</div>
+          <p>Upload foto dulu, pilih bahasa, lalu tekan generate.</p>
+        </div>
 
-/* =================== COPY BUTTON =================== */
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.copy-btn');
-  if (!btn) return;
-  const text = btn.dataset.caption.replace(/\\n/g, '\n');
-  navigator.clipboard.writeText(text).then(() => {
-    btn.classList.add('copied');
-    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
-    btn.setAttribute('aria-label', 'Tersalin!');
-    setTimeout(() => {
-      btn.classList.remove('copied');
-      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
-      btn.setAttribute('aria-label', 'Copy caption');
-    }, 2000);
-  }).catch(() => {
-    // Fallback
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-    btn.classList.add('copied');
-    setTimeout(() => btn.classList.remove('copied'), 2000);
-  });
-});
+        <div class="loading-state" id="loadingState">
+          <div class="spinner"></div>
+          <div class="loading-text">Lagi bikin caption yang lebih sosmed...</div>
+        </div>
 
-/* =================== GENERATE =================== */
-generateBtn.addEventListener('click', async () => {
-  if (!imageBase64) return;
+        <div class="error-state" id="errorState">
+          <div class="error-msg" id="errorMsg"></div>
+        </div>
 
-  generateBtn.disabled = true;
-  showLoading();
+        <div class="captions-list" id="captionsList"></div>
+      </section>
+    </main>
 
-  try {
-    const response = await fetch(API_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        imageBase64,
-        imageType,
-        lang: selectedLang
-      })
+    <footer class="footer">Powered by <b>MMK-CAPTION</b> × Groq AI</footer>
+  </div>
+
+  <script>
+    const API_ENDPOINT = '/.netlify/functions/generate';
+    const LABELS = ['HOOK', 'HOOK', 'PHOTO VIBE', 'PHOTO VIBE', 'IG + HASHTAG', 'FB + HASHTAG'];
+
+    let selectedLang = 'ID';
+    let imageBase64 = null;
+    let imageType = 'image/jpeg';
+
+    const root = document.documentElement;
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+    const savedTheme = localStorage.getItem('mmk-theme') || 'dark';
+    root.setAttribute('data-theme', savedTheme);
+    themeToggle.textContent = savedTheme === 'dark' ? '☾' : '☀';
+    themeToggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('mmk-theme', next);
+      themeToggle.textContent = next === 'dark' ? '☾' : '☀';
     });
 
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      throw new Error(err.error || `HTTP ${response.status}`);
+    const fileInput = document.getElementById('fileInput');
+    const uploadZone = document.getElementById('uploadZone');
+    const previewWrap = document.getElementById('previewWrap');
+    const previewImg = document.getElementById('previewImg');
+    const removeBtn = document.getElementById('removeBtn');
+    const generateBtn = document.getElementById('generateBtn');
+    const captionsList = document.getElementById('captionsList');
+    const loadingState = document.getElementById('loadingState');
+    const emptyState = document.getElementById('emptyState');
+    const errorState = document.getElementById('errorState');
+    const errorMsg = document.getElementById('errorMsg');
+    const resultsBadge = document.getElementById('resultsBadge');
+
+    fileInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) handleFile(file);
+    });
+
+    uploadZone.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      uploadZone.classList.add('drag-over');
+    });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+    uploadZone.addEventListener('drop', (event) => {
+      event.preventDefault();
+      uploadZone.classList.remove('drag-over');
+      const file = event.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) handleFile(file);
+    });
+
+    function handleFile(file) {
+      const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+      if (!allowed.includes(file.type)) {
+        showError('Format belum didukung. Gunakan JPG, PNG, atau WEBP.');
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        showError('Ukuran file terlalu besar. Maksimal 10 MB.');
+        return;
+      }
+
+      imageType = file.type;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const result = event.target.result;
+        imageBase64 = result.split(',')[1];
+        previewImg.src = result;
+        uploadZone.style.display = 'none';
+        previewWrap.classList.add('visible');
+        generateBtn.disabled = false;
+        resetResults();
+      };
+      reader.readAsDataURL(file);
     }
 
-    const data = await response.json();
+    removeBtn.addEventListener('click', () => {
+      imageBase64 = null;
+      fileInput.value = '';
+      previewImg.src = '';
+      previewWrap.classList.remove('visible');
+      uploadZone.style.display = '';
+      generateBtn.disabled = true;
+      resetResults();
+    });
 
-    if (data.captions && data.captions.length > 0) {
-      showCaptions(data.captions);
-    } else {
-      throw new Error('Hasil caption kosong. Coba lagi ya! 😊');
+    document.querySelectorAll('.lang-btn').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.lang-btn').forEach((item) => {
+          item.classList.remove('active');
+          item.setAttribute('aria-pressed', 'false');
+        });
+        button.classList.add('active');
+        button.setAttribute('aria-pressed', 'true');
+        selectedLang = button.dataset.lang;
+      });
+    });
+
+    function resetResults() {
+      emptyState.style.display = 'block';
+      loadingState.classList.remove('visible');
+      errorState.classList.remove('visible');
+      captionsList.classList.remove('visible');
+      captionsList.innerHTML = '';
+      resultsBadge.textContent = 'Ready';
     }
 
-  } catch (err) {
-    showError('Gagal generate: ' + err.message);
-  } finally {
-    generateBtn.disabled = false;
-  }
-});
-</script>
+    function showError(message) {
+      emptyState.style.display = 'none';
+      loadingState.classList.remove('visible');
+      captionsList.classList.remove('visible');
+      errorMsg.textContent = message;
+      errorState.classList.add('visible');
+      resultsBadge.textContent = 'Error';
+    }
+
+    function showLoading() {
+      emptyState.style.display = 'none';
+      errorState.classList.remove('visible');
+      captionsList.classList.remove('visible');
+      loadingState.classList.add('visible');
+      resultsBadge.textContent = 'Generating';
+    }
+
+    function showCaptions(captions) {
+      loadingState.classList.remove('visible');
+      emptyState.style.display = 'none';
+      errorState.classList.remove('visible');
+      captionsList.innerHTML = '';
+
+      captions.forEach((caption, index) => {
+        const item = document.createElement('div');
+        item.className = 'caption-item';
+
+        const number = document.createElement('div');
+        number.className = 'caption-number';
+        number.textContent = String(index + 1);
+
+        const content = document.createElement('div');
+        const tag = document.createElement('span');
+        tag.className = 'caption-tag';
+        tag.textContent = LABELS[index] || 'CAPTION';
+        const text = document.createElement('div');
+        text.className = 'caption-text';
+        text.textContent = caption;
+        content.append(tag, text);
+
+        const copy = document.createElement('button');
+        copy.className = 'copy-btn';
+        copy.type = 'button';
+        copy.title = 'Salin caption';
+        copy.setAttribute('aria-label', `Salin caption ${index + 1}`);
+        copy.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+        copy.addEventListener('click', () => copyText(caption, copy));
+
+        item.append(number, content, copy);
+        captionsList.appendChild(item);
+      });
+
+      resultsBadge.textContent = `${captions.length} caption`;
+      captionsList.classList.add('visible');
+    }
+
+    async function copyText(text, button) {
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (_) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+
+      button.classList.add('copied');
+      button.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+      setTimeout(() => {
+        button.classList.remove('copied');
+        button.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+      }, 1400);
+    }
+
+    generateBtn.addEventListener('click', async () => {
+      if (!imageBase64) return;
+      generateBtn.disabled = true;
+      showLoading();
+
+      try {
+        const response = await fetch(API_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ imageBase64, imageType, lang: selectedLang })
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+        if (!Array.isArray(data.captions) || data.captions.length === 0) {
+          throw new Error('Hasil caption kosong. Coba generate ulang.');
+        }
+        showCaptions(data.captions);
+      } catch (error) {
+        showError('Gagal generate: ' + error.message);
+      } finally {
+        generateBtn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 // MMK-CAPTION - Netlify Function
-// Vision caption generator for IG/FB style captions.
+// Vision caption generator for short flirty IG/FB fanpage captions.
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const VISION_MODEL = "meta-llama/llama-4-scout-17b-16e-instruct";
@@ -8,71 +8,81 @@ const LANG_PROFILES = {
   ID: {
     label: "Bahasa Indonesia",
     locale: "Indonesia",
-    style: "bahasa Indonesia gaul sosmed, natural, tidak baku, cocok untuk caption IG/FB Indonesia",
+    targetAudience: "cowok Indonesia dewasa di Facebook/Instagram",
+    style: "bahasa Indonesia santai, genit ringan, pendek, terasa seperti cewek di sosmed, bukan copywriting dan bukan caption formal",
     examples: [
-      "jangan cuma diliatin, disapa juga boleh 🤭",
-      "mode kalem, tapi bikin kepikiran 😌✨",
-      "senyum dikit biar harimu aman ya 😝"
+      "halo mas 🤭",
+      "jangan cuma lihat, sapa dong 😌",
+      "senyum dikit, biar mas kepikiran 💋",
+      "yang berani komen duluan siapa? 😝"
     ],
     hashtagHints: {
-      ig: "#fyp #explorepage #viral #ootd #selfie #cantik #indonesia #reelsindonesia",
-      fb: "#fbviral #fypfb #facebookpost #viralindonesia #captionfb #fotohariini"
+      ig: "#fyp #explorepage #viral #cantik #cewekindo #selfie #reelsindonesia",
+      fb: "#fbviral #fypfb #viralindonesia #captionfb #fotocantik #cewekindo"
     }
   },
   EN: {
     label: "English",
-    locale: "global English IG/FB audience",
-    style: "casual social-media English, playful, short, non-formal, IG/FB native",
+    locale: "global English audience",
+    targetAudience: "adult men on Facebook/Instagram",
+    style: "short flirty social-media English, playful and casual, not formal, not poetic, like a real IG/FB caption",
     examples: [
-      "don’t just stare, say hi 🤭",
-      "soft look, dangerous effect 😌✨",
-      "cute enough to ruin your focus 😝"
+      "hey you 🤭",
+      "don’t just stare, say hi 😌",
+      "careful, I might stay on your mind 💋",
+      "who’s brave enough to comment first? 😝"
     ],
     hashtagHints: {
-      ig: "#explorepage #fyp #viral #instagood #photooftheday #selfie #reels",
-      fb: "#facebookviral #fbpost #viralpost #trendingnow #photooftheday #socialpost"
+      ig: "#explorepage #fyp #viral #instagood #selfie #reels #prettygirl",
+      fb: "#facebookviral #fbpost #viralpost #trendingnow #photopost #prettygirl"
     }
   },
   MY: {
     label: "Bahasa Melayu Malaysia",
     locale: "Malaysia",
-    style: "Bahasa Melayu santai Malaysia, slang ringan, bukan baku Indonesia, natural untuk IG/FB Malaysia",
+    targetAudience: "lelaki Malaysia dewasa di Facebook/Instagram",
+    style: "Bahasa Melayu Malaysia santai, ayat pendek, manja dan mengusik ringan, bukan Bahasa Indonesia, bukan ayat formal",
     examples: [
+      "hi awak 💋",
       "tengok je ke, tak nak tegur? 🤭",
-      "nampak soft, tapi bahaya sikit 😌✨",
-      "senyum sikit, terus hilang fokus kan 😝"
+      "senyum sikit, biar awak ingat 😌",
+      "siapa berani komen dulu? 😝"
     ],
     hashtagHints: {
-      ig: "#fypmalaysia #explorepage #viralmalaysia #ootdmalaysia #selfiemalaysia #malaysiagirl",
-      fb: "#fbviralmalaysia #facebookmalaysia #viralmalaysia #captionfb #fotomalaysia #trendingmalaysia"
+      ig: "#fypmalaysia #explorepage #viralmalaysia #malaysiagirl #selfiemalaysia #ootdmalaysia",
+      fb: "#fbviralmalaysia #facebookmalaysia #viralmalaysia #captionfb #fotomalaysia #malaysiagirl"
     }
   },
   TH: {
     label: "ภาษาไทย",
     locale: "Thailand",
-    style: "ภาษาไทยสไตล์โซเชียล IG/FB, เป็นธรรมชาติ, ขี้เล่น, ไม่เป็นทางการ, ใช้คำไทยวัยรุ่นแบบสุภาพ",
+    targetAudience: "ผู้ชายไทยวัยผู้ใหญ่บน Facebook/Instagram",
+    style: "ภาษาไทยโซเชียลแบบสั้น ๆ ขี้เล่น อ่อยเบา ๆ สุภาพ เป็นธรรมชาติ ไม่เป็นทางการ ไม่เหมือนแปลตรงตัว",
     examples: [
-      "มองเฉย ๆ ไม่ทักหน่อยเหรอ 🤭",
-      "ลุคใส ๆ แต่ทำใจสั่นนะ 😌✨",
-      "ยิ้มให้แล้วนะ ห้ามใจละลาย 😝"
+      "ทักหน่อยได้ไหมคะ 🤭",
+      "มองเฉย ๆ ไม่คิดจะทักเหรอ 😌",
+      "ยิ้มให้แล้วนะ ใจสั่นยัง 💋",
+      "ใครกล้าคอมเมนต์ก่อน 😝"
     ],
     hashtagHints: {
-      ig: "#ฟีด #ติดเทรนด์ #ไวรัล #สาวไทย #น่ารัก #ถ่ายรูป #ไอจีไทย",
-      fb: "#เฟซบุ๊กไวรัล #โพสต์เฟซบุ๊ก #ไวรัลไทย #แคปชั่นเฟซบุ๊ก #รูปวันนี้"
+      ig: "#ฟีด #ติดเทรนด์ #ไวรัล #สาวน่ารัก #สาวไทย #ไอจีไทย #เซลฟี่",
+      fb: "#เฟซบุ๊กไวรัล #โพสต์เฟซบุ๊ก #ไวรัลไทย #แคปชั่นเฟซบุ๊ก #สาวน่ารัก"
     }
   },
   VI: {
     label: "Tiếng Việt",
     locale: "Vietnam",
-    style: "tiếng Việt mạng xã hội tự nhiên, trẻ trung, thả thính nhẹ, không trang trọng, đúng vibe IG/FB Việt Nam",
+    targetAudience: "nam giới trưởng thành ở Facebook/Instagram Việt Nam",
+    style: "tiếng Việt mạng xã hội ngắn, thả thính nhẹ, đáng yêu, tự nhiên, không trang trọng, không dịch máy",
     examples: [
-      "nhìn thôi à, không định chào sao 🤭",
-      "ngoài thì dịu, trong thì hơi nguy hiểm 😌✨",
-      "cười nhẹ một cái cho ai đó mất tập trung 😝"
+      "chào anh 🤭",
+      "nhìn thôi à, không chào em sao 😌",
+      "cười nhẹ vậy thôi mà nhớ chưa 💋",
+      "ai dám bình luận đầu tiên nào 😝"
     ],
     hashtagHints: {
       ig: "#xuhuong #viral #fyp #gaixinh #vietnam #selfie #instavietnam",
-      fb: "#facebookviral #xuhuongfacebook #viralvietnam #captionfacebook #anhdep #homnay"
+      fb: "#facebookviral #xuhuongfacebook #viralvietnam #captionfacebook #gaixinh #anhdep"
     }
   }
 };
@@ -86,36 +96,44 @@ function buildPrompt(lang) {
     day: "2-digit"
   }).format(new Date());
 
-  return `You are an expert IG/FB social caption writer. Analyze the image and write captions in ${profile.label} for ${profile.locale}.
+  return `You are a specialist Facebook/Instagram fanpage caption writer.
+Analyze the uploaded image and create short captions in ${profile.label} for ${profile.locale}.
+
+CONTEXT:
+- The user is building a Facebook fanpage with photos of Malay / Southeast Asian women.
+- The goal is engagement from ${profile.targetAudience}: comments, reactions, profile visits, and light DM curiosity.
+- Captions should feel like a real girl posting casually, not a brand, not an influencer agency, not formal copywriting.
 
 TODAY: ${today}
 LANGUAGE STYLE: ${profile.style}
 
-Main goal:
-- Captions must feel like real social media captions, not formal copywriting.
-- Short, punchy, flirty/playful, natural, and photo-aware.
-- Avoid stiff, corporate, poetic, or over-explained language.
-- Use correct spelling, punctuation, and native phrasing for ${profile.label}.
-- Use 1-3 fitting emojis per caption.
-- Do not mention AI, image analysis, or that you are reading a photo.
-- Do not use sexual explicit language, minors, or adult-service wording.
+CAPTION DIRECTION:
+- Very short: ideally 2-8 words per caption.
+- Flirty, teasing, cute, slightly tempting, but still safe and non-explicit.
+- Use 1-3 emojis per caption, usually at the end.
+- Make the captions invite men to react, comment, or greet.
+- Prefer direct address when natural: "mas", "abang", "awak", "anh", "คะ", etc., depending on the selected language.
+- Use simple social-media wording, not literary or descriptive sentences.
+- Do NOT write long image descriptions like outfit/background/pose unless it makes the line more attractive.
+- Do NOT sound formal, poetic, corporate, motivational, or robotic.
+- Do NOT use vulgar sexual words, prostitution/adult-service tone, minors, or explicit body-part focus.
+- Do NOT mention AI, the model, image analysis, or that a photo was uploaded.
 
-Output structure: EXACTLY 6 recommendations.
-1-2: very strong hook captions; highly attention-grabbing.
-3-4: captions adjusted to the photo mood, outfit, expression, and vibe.
-5: Instagram caption with hashtags. Put the caption text first, then exactly ONE newline, then IG hashtags.
-6: Facebook caption with hashtags. Put the caption text first, then exactly ONE newline, then FB hashtags.
+OUTPUT STRUCTURE: EXACTLY 6 recommendations.
+1-2: brutal/strong short hooks for attention, suitable for fanpage engagement.
+3-4: short captions adjusted to the photo vibe, expression, outfit, and mood.
+5: Instagram version: short caption first, then exactly ONE newline, then IG hashtags.
+6: Facebook version: short caption first, then exactly ONE newline, then FB hashtags.
 
-Hashtag rules:
-- Use hashtags that feel currently popular and locally relevant for ${profile.locale} as of TODAY.
+HASHTAG RULES:
+- Hashtags should feel currently popular and locally relevant for ${profile.locale} as of TODAY.
 - IG hashtag direction: ${profile.hashtagHints.ig}
 - FB hashtag direction: ${profile.hashtagHints.fb}
-- Match hashtags to the selected language and photo content.
-- For #5 use IG-style hashtags only.
-- For #6 use FB-style hashtags only.
-- Keep hashtags readable; 5-8 hashtags per caption.
+- Use 5-8 hashtags for #5 and #6.
+- Match hashtags to the selected language, platform, and photo vibe.
+- Do not put hashtags in caption 1-4.
 
-Example tone references:
+REFERENCE TONE, DO NOT COPY EXACTLY EVERY TIME:
 ${profile.examples.map((x) => `- ${x}`).join("\n")}
 
 Return ONLY valid JSON, no markdown, no explanation:
@@ -215,8 +233,8 @@ exports.handler = async (event) => {
             ]
           }
         ],
-        max_tokens: 900,
-        temperature: 0.95,
+        max_tokens: 650,
+        temperature: 1.05,
         response_format: { type: "json_object" }
       })
     });

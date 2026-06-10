@@ -9,12 +9,13 @@ const LANG_PROFILES = {
     label: "Bahasa Indonesia",
     locale: "Indonesia",
     targetAudience: "cowok Indonesia dewasa di Facebook/Instagram",
-    style: "bahasa Indonesia santai, genit ringan, pendek, terasa seperti cewek di sosmed, bukan copywriting dan bukan caption formal",
+    style: "bahasa Indonesia Gen-Z yang hidup, centil tipis, gabut, manja, sedikit menggoda, singkat, tidak kaku, tidak default AI, terasa seperti caption cewek asli di IG/FB",
     examples: [
-      "halo mas 🤭",
-      "jangan cuma lihat, sapa dong 😌",
-      "senyum dikit, biar mas kepikiran 💋",
-      "yang berani komen duluan siapa? 😝"
+      "lihat boleh, salting jangan 🤭✨",
+      "gabut dikit, bikin kamu mikir banyak 🫠💋",
+      "mas, jangan cuma jadi penonton 😌🫶🏻",
+      "aku upload santai, kamu yang kepikiran kan? 😳✨",
+      "yang diem-diem suka, sini muncul dulu 🤭🖤"
     ],
     hashtagHints: {
       ig: "#fyp #explorepage #viral #cantik #cewekindo #selfie #reelsindonesia",
@@ -25,12 +26,13 @@ const LANG_PROFILES = {
     label: "English",
     locale: "global English audience",
     targetAudience: "adult men on Facebook/Instagram",
-    style: "short flirty social-media English, playful and casual, not formal, not poetic, like a real IG/FB caption",
+    style: "short Gen-Z English captions, soft-flirty, playful, aesthetic, casual IG/FB style, not formal, not poetic, not robotic, not default AI",
     examples: [
-      "hey you 🤭",
-      "don’t just stare, say hi 😌",
-      "careful, I might stay on your mind 💋",
-      "who’s brave enough to comment first? 😝"
+      "look once, think twice 🤭✨",
+      "soft post, loud thoughts 🫠💋",
+      "don’t just stare, say something 😌🫶🏻",
+      "posted this casually, ruined your focus maybe 😳✨",
+      "quiet likes are cute, comments are better 🤭🖤"
     ],
     hashtagHints: {
       ig: "#explorepage #fyp #viral #instagood #selfie #reels #prettygirl",
@@ -41,12 +43,13 @@ const LANG_PROFILES = {
     label: "Bahasa Melayu Malaysia",
     locale: "Malaysia",
     targetAudience: "lelaki Malaysia dewasa di Facebook/Instagram",
-    style: "Bahasa Melayu Malaysia santai, ayat pendek, manja dan mengusik ringan, bukan Bahasa Indonesia, bukan ayat formal",
+    style: "Bahasa Melayu Malaysia santai, Gen-Z, ayat pendek, manja, cute, mengusik ringan, bukan Bahasa Indonesia, bukan ayat formal, bukan hasil translate",
     examples: [
-      "hi awak 💋",
-      "tengok je ke, tak nak tegur? 🤭",
-      "senyum sikit, biar awak ingat 😌",
-      "siapa berani komen dulu? 😝"
+      "tengok boleh, tersuka jangan 🤭✨",
+      "upload sikit, awak pula fikir banyak 🫠💋",
+      "kalau nampak, jangan diam sangat 😌🫶🏻",
+      "saja lalu feed, kot ada yang rindu 😳✨",
+      "yang stalk diam-diam tu, hai 🤭🖤"
     ],
     hashtagHints: {
       ig: "#fypmalaysia #explorepage #viralmalaysia #malaysiagirl #selfiemalaysia #ootdmalaysia",
@@ -57,12 +60,13 @@ const LANG_PROFILES = {
     label: "ภาษาไทย",
     locale: "Thailand",
     targetAudience: "ผู้ชายไทยวัยผู้ใหญ่บน Facebook/Instagram",
-    style: "ภาษาไทยโซเชียลแบบสั้น ๆ ขี้เล่น อ่อยเบา ๆ สุภาพ เป็นธรรมชาติ ไม่เป็นทางการ ไม่เหมือนแปลตรงตัว",
+    style: "ภาษาไทยโซเชียล Gen-Z สั้น ๆ น่ารัก ขี้เล่น อ่อยเบา ๆ สุภาพ เป็นธรรมชาติ ไม่เป็นทางการ ไม่เหมือนแปลตรงตัว ไม่แข็งแบบ AI",
     examples: [
-      "ทักหน่อยได้ไหมคะ 🤭",
-      "มองเฉย ๆ ไม่คิดจะทักเหรอ 😌",
-      "ยิ้มให้แล้วนะ ใจสั่นยัง 💋",
-      "ใครกล้าคอมเมนต์ก่อน 😝"
+      "มองได้ แต่อย่าเผลอใจนะ 🤭✨",
+      "ลงเล่น ๆ แต่มีคนคิดจริงไหม 🫠💋",
+      "เห็นแล้วก็อย่าเงียบสิ 😌🫶🏻",
+      "วันนี้น่ารักพอให้ทักยัง 😳✨",
+      "คนที่แอบมองอยู่ ทักมาได้นะ 🤭🖤"
     ],
     hashtagHints: {
       ig: "#ฟีด #ติดเทรนด์ #ไวรัล #สาวน่ารัก #สาวไทย #ไอจีไทย #เซลฟี่",
@@ -73,12 +77,13 @@ const LANG_PROFILES = {
     label: "Tiếng Việt",
     locale: "Vietnam",
     targetAudience: "nam giới trưởng thành ở Facebook/Instagram Việt Nam",
-    style: "tiếng Việt mạng xã hội ngắn, thả thính nhẹ, đáng yêu, tự nhiên, không trang trọng, không dịch máy",
+    style: "tiếng Việt mạng xã hội Gen-Z ngắn, thả thính nhẹ, cute, tự nhiên, không trang trọng, không dịch máy, không cứng như AI",
     examples: [
-      "chào anh 🤭",
-      "nhìn thôi à, không chào em sao 😌",
-      "cười nhẹ vậy thôi mà nhớ chưa 💋",
-      "ai dám bình luận đầu tiên nào 😝"
+      "nhìn thôi, đừng rung động nha 🤭✨",
+      "đăng nhẹ mà ai đó nghĩ nhiều 🫠💋",
+      "thấy rồi thì đừng im lặng 😌🫶🏻",
+      "hôm nay đủ xinh để anh nhắn chưa 😳✨",
+      "ai lặng lẽ xem thì hiện hình đi 🤭🖤"
     ],
     hashtagHints: {
       ig: "#xuhuong #viral #fyp #gaixinh #vietnam #selfie #instavietnam",
@@ -100,7 +105,7 @@ function buildPrompt(lang) {
 
 Kamu adalah AI analis gambar dan pembuat caption Instagram.
 
-Tugas utama kamu adalah menganalisa gambar yang dikirim user, memahami vibe visualnya, lalu langsung membuat 5 rekomendasi caption Instagram pendek sesuai bahasa yang dipilih user.
+Tugas utama kamu adalah menganalisa gambar yang dikirim user, memahami vibe visualnya, lalu langsung membuat 6 rekomendasi caption Instagram pendek sesuai bahasa yang dipilih user.
 
 BAHASA OUTPUT:
 - Kode bahasa: ${lang}
@@ -119,12 +124,13 @@ ATURAN UTAMA:
 7. Jangan bertanya ulang kecuali gambar benar-benar tidak bisa dibaca.
 8. Jangan menyebut AI, model, proses analisa, atau upload gambar.
 
-STYLE CAPTION:
-- Gen-Z
+STYLE CAPTION WAJIB KUAT:
+- Gen-Z yang jelas terasa, bukan caption default AI
 - Aesthetic
 - Genit tipis
 - Gabut
 - Santai
+- Manja tipis
 - Sedikit menggoda
 - Mengarah ke interaksi lawan jenis
 - Cocok untuk akun cewek
@@ -134,7 +140,8 @@ STYLE CAPTION:
 - Tidak vulgar
 - Tidak norak
 - Tidak lebay berlebihan
-- Boleh memakai emoji secukupnya: 💋 🤭 ✨ 🫶🏻 😌 🖤 🤍 🫠 🌷 😳
+- Setiap caption WAJIB punya kombinasi emoji yang natural, minimal 1 emoji dan maksimal 3 emoji.
+- Emoji yang boleh dipakai dan dikombinasikan: 💋 🤭 ✨ 🫶🏻 😌 🖤 🤍 🫠 🌷 😳 😝 🫣 💅🏻
 
 ARAH HOOK:
 - Mengundang komentar
@@ -143,6 +150,9 @@ ARAH HOOK:
 - Bisa berupa kalimat pendek, pertanyaan, atau sindiran halus
 - Tidak terlalu menjelaskan foto secara literal
 - Lebih terasa seperti caption asli sosmed, bukan hasil translate dan bukan copywriting formal
+- Hindari caption hambar seperti: "sudah siap buat jalan nih", "mas, mampir dong", "malam-malam gini kamu ngapain?", "lagi santai".
+- Caption harus punya hook yang lebih hidup: bikin penasaran, ngajak komentar, centil, atau bikin cowok merasa diajak ngobrol.
+- Jangan terlalu literal menjelaskan foto. Jangan terlalu umum. Jangan kaku.
 
 ATURAN BAHASA:
 - Jika ID: pakai bahasa Indonesia santai, Gen-Z, natural, tidak baku.
@@ -152,22 +162,30 @@ ATURAN BAHASA:
 - Jika TH: pakai bahasa Thailand sosial media yang natural, cute, Gen-Z, bukan translate kaku.
 
 FORMAT OUTPUT WAJIB:
-- Buat tepat 5 caption.
-- Caption 1 sampai 4: caption pendek tanpa hashtag.
-- Caption 5: caption pendek + tepat 3 hashtag.
+- Buat tepat 6 caption.
+- Caption 1 sampai 5: caption pendek tanpa hashtag.
+- Caption 6: caption pendek + tepat 3 hashtag.
+- Setiap caption wajib memakai emoji natural.
+- Panjang ideal tiap caption: 4 sampai 12 kata.
 - Hashtag harus relevan dengan visual foto, niche, outfit, lokasi, atau vibe gambar.
 - Hashtag jangan asal tempel, maksimal 3, campur niche + traffic jika cocok.
-- Jangan gunakan hashtag pada caption 1 sampai 4.
+- Jangan gunakan hashtag pada caption 1 sampai 5.
 
 REFERENSI TONE, JANGAN COPY PERSIS TERUS:
 ${profile.examples.map((x) => `- ${x}`).join("\n")}
 
 REFERENSI HASHTAG:
 - IG/local hints: ${profile.hashtagHints.ig}
-- Gunakan hanya 3 hashtag terbaik pada caption ke-5.
+- Gunakan hanya 3 hashtag terbaik pada caption ke-6.
+
+KUALITAS OUTPUT:
+- Jangan aman/mainstream/kaku.
+- Jangan seperti template AI.
+- Buat variasi: ada yang pertanyaan, ada yang sindiran halus, ada yang manja, ada yang aesthetic.
+- Tetap sopan, tidak vulgar, tidak kasar.
 
 OUTPUT HARUS VALID JSON SAJA, tanpa markdown, tanpa penjelasan:
-{"captions":["caption 1","caption 2","caption 3","caption 4","caption 5 #hashtag1 #hashtag2 #hashtag3"]}`;
+{"captions":["caption 1","caption 2","caption 3","caption 4","caption 5","caption 6 #hashtag1 #hashtag2 #hashtag3"]}`;
 }
 
 function stripCodeFence(text) {
@@ -191,7 +209,7 @@ function parseCaptions(rawText) {
   try {
     const parsed = JSON.parse(text);
     if (Array.isArray(parsed?.captions)) {
-      return parsed.captions.map(cleanCaption).filter(Boolean).slice(0, 5);
+      return parsed.captions.map(cleanCaption).filter(Boolean).slice(0, 6);
     }
   } catch (_) {}
 
@@ -200,13 +218,13 @@ function parseCaptions(rawText) {
     .split(/(?:^|\n)\s*(?:\d+[.)]|[-*•])\s+/)
     .map(cleanCaption)
     .filter(Boolean);
-  if (numbered.length >= 5) return numbered.slice(0, 5);
+  if (numbered.length >= 6) return numbered.slice(0, 6);
 
   return text
     .split(/\n{2,}/)
     .map(cleanCaption)
     .filter(Boolean)
-    .slice(0, 5);
+    .slice(0, 6);
 }
 
 exports.handler = async (event) => {
@@ -263,8 +281,8 @@ exports.handler = async (event) => {
             ]
           }
         ],
-        max_tokens: 450,
-        temperature: 1.05,
+        max_tokens: 650,
+        temperature: 1.18,
         response_format: { type: "json_object" }
       })
     });
@@ -279,14 +297,14 @@ exports.handler = async (event) => {
     const rawText = groqData?.choices?.[0]?.message?.content || "";
     const captions = parseCaptions(rawText);
 
-    if (captions.length < 5) {
-      throw new Error("Output kurang dari 5 caption. Coba generate ulang.");
+    if (captions.length < 6) {
+      throw new Error("Output kurang dari 6 caption. Coba generate ulang.");
     }
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ captions: captions.slice(0, 5) })
+      body: JSON.stringify({ captions: captions.slice(0, 6) })
     };
   } catch (err) {
     return {

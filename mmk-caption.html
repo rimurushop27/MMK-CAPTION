@@ -447,12 +447,6 @@
       <button class="theme-toggle" data-theme-toggle aria-label="Ganti mode terang atau gelap">☾</button>
     </header>
 
-    <section class="hero">
-      <div class="kicker">⚡ 6 caption sekali generate</div>
-      <h1>Caption fanspage yang bikin cowok nyapa.</h1>
-      <p>Upload foto, pilih bahasa, lalu dapatkan caption pendek ala FB/IG: genit ringan, manja, dan memancing komentar.</p>
-    </section>
-
     <main>
       <section class="card">
         <div class="section-title"><strong>1. Upload Foto</strong><span>JPG / PNG / WEBP</span></div>
@@ -481,7 +475,7 @@
           <button class="lang-btn" data-lang="TH" aria-pressed="false"><span class="lang-flag">🇹🇭</span><span class="lang-code">TH</span></button>
           <button class="lang-btn" data-lang="VI" aria-pressed="false"><span class="lang-flag">🇻🇳</span><span class="lang-code">VI</span></button>
         </div>
-        <div class="note">Output: 1–2 hook pendek, 3–4 sesuai vibe foto, 5 versi IG + hashtag, 6 versi FB + hashtag.</div>
+        <div class="note">Output: 5 caption pendek. Caption ke-5 otomatis pakai 3 hashtag relevan.</div>
       </section>
 
       <button class="btn-generate" id="generateBtn" disabled>
@@ -518,7 +512,7 @@
 
   <script>
     const API_ENDPOINT = '/.netlify/functions/generate';
-    const LABELS = ['HOOK COWOK', 'HOOK COWOK', 'VIBE FOTO', 'VIBE FOTO', 'IG + HASHTAG', 'FB + HASHTAG'];
+    const LABELS = ['CAPTION', 'CAPTION', 'CAPTION', 'CAPTION', 'CAPTION + HASHTAG'];
 
     let selectedLang = 'ID';
     let imageBase64 = null;
@@ -578,17 +572,50 @@
       }
 
       imageType = file.type;
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const result = event.target.result;
-        imageBase64 = result.split(',')[1];
-        previewImg.src = result;
-        uploadZone.style.display = 'none';
-        previewWrap.classList.add('visible');
-        generateBtn.disabled = false;
-        resetResults();
-      };
-      reader.readAsDataURL(file);
+      resizeImageForAnalysis(file)
+        .then(({ dataUrl, base64, mimeType }) => {
+          imageType = mimeType;
+          imageBase64 = base64;
+          previewImg.src = dataUrl;
+          uploadZone.style.display = 'none';
+          previewWrap.classList.add('visible');
+          generateBtn.disabled = false;
+          resetResults();
+        })
+        .catch(() => showError('Gagal memproses gambar. Coba upload foto lain.'));
+    }
+
+    function resizeImageForAnalysis(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = () => {
+          const img = new Image();
+          img.onerror = reject;
+          img.onload = () => {
+            const maxSide = 768;
+            const scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+            const width = Math.max(1, Math.round(img.width * scale));
+            const height = Math.max(1, Math.round(img.height * scale));
+
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d', { alpha: false });
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const mimeType = 'image/jpeg';
+            const dataUrl = canvas.toDataURL(mimeType, 0.76);
+            resolve({
+              dataUrl,
+              base64: dataUrl.split(',')[1],
+              mimeType
+            });
+          };
+          img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
     }
 
     removeBtn.addEventListener('click', () => {

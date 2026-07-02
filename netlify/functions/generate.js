@@ -163,13 +163,16 @@ ATURAN BAHASA:
 
 FORMAT OUTPUT WAJIB:
 - Buat tepat 6 caption.
-- Caption 1 sampai 5: caption pendek tanpa hashtag.
-- Caption 6: caption pendek + tepat 3 hashtag.
-- Setiap caption wajib memakai emoji natural.
-- Panjang ideal tiap caption: 4 sampai 12 kata.
-- Hashtag harus relevan dengan visual foto, niche, outfit, lokasi, atau vibe gambar.
-- Hashtag jangan asal tempel, maksimal 3, campur niche + traffic jika cocok.
-- Jangan gunakan hashtag pada caption 1 sampai 5.
+- Caption 1 dan 2: GAYA 1 (ASBUN Gen-Z). Asbun = asal bunyi, random, spontan, terasa seperti isi kepala atau curhatan receh yang nyambung dengan vibe foto. Tidak harus membahas foto secara langsung. Boleh absurd ringan, overthinking, halu, self-talk, atau pikiran random yang relatable. Harus terasa ditulis manusia, bukan AI.
+- Caption 3 dan 4: GAYA 2 (TEASING & CENTIL). Berupa kalimat menggoda, pertanyaan lucu, godaan tipis, atau pernyataan yang memancing komentar/interaksi. Terasa usil, manja, genit ringan, playful, tetapi tetap sopan dan tidak vulgar.
+- Caption 5: GAYA 1 (ASBUN) + tepat 3 hashtag populer dan relevan.
+- Caption 6: GAYA 2 (TEASING & CENTIL) + tepat 3 hashtag populer dan relevan.
+- Semua caption wajib pendek (4-12 kata), natural, tidak seperti template AI.
+- Setiap caption wajib memakai 1-3 emoji yang menyatu alami dengan kalimat.
+- Jangan mengulang ide, hook, emoji, atau pola kalimat.
+- Gunakan bahasa percakapan yang sedang tren di media sosial. Jika perlu gunakan istilah Gen-Z yang umum dipakai di Instagram, Threads, TikTok, Facebook, atau X, namun jangan memaksakan slang.
+- Hindari pembuka generik, quotes motivasi, atau caption yang terdengar seperti copywriting.
+- Hashtag harus relevan dengan visual, niche, dan tren umum; jangan spam.
 
 REFERENSI TONE, JANGAN COPY PERSIS TERUS:
 ${profile.examples.map((x) => `- ${x}`).join("\n")}

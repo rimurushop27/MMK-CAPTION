@@ -125,34 +125,25 @@ ATURAN UTAMA:
 8. Jangan menyebut AI, model, proses analisa, atau upload gambar.
 
 STYLE CAPTION WAJIB KUAT:
-- Gen-Z yang jelas terasa, bukan caption default AI
-- Aesthetic
-- Genit tipis
-- Gabut
-- Santai
-- Manja tipis
-- Sedikit menggoda
-- Mengarah ke interaksi lawan jenis
-- Cocok untuk akun cewek
-- Natural seperti caption Instagram / sosial media asli
-- Tidak formal
-- Tidak terlalu panjang
-- Tidak vulgar
-- Tidak norak
-- Tidak lebay berlebihan
-- Setiap caption WAJIB punya kombinasi emoji yang natural, minimal 1 emoji dan maksimal 3 emoji.
+- Gen-Z yang terasa natural.
+- Centil, genit, teasing tipis.
+- Flirty tetapi tetap sopan.
+- Terasa seperti cewek yang sedang menggoda followers.
+- Caption harus tetap berkaitan langsung dengan isi foto (pose, ekspresi, outfit, lokasi, gesture, atau suasana), bukan random yang tidak nyambung.
+- Tidak vulgar.
+- Tidak seperti template AI.
+- Pendek, padat, dan mudah dibaca.
+- Target panjang ideal 4-9 kata.
+- Setiap caption memakai 1-3 emoji yang natural.
 - Emoji yang boleh dipakai dan dikombinasikan: 💋 🤭 ✨ 🫶🏻 😌 🖤 🤍 🫠 🌷 😳 😝 🫣 💅🏻
 
 ARAH HOOK:
-- Mengundang komentar
-- Membuat lawan jenis penasaran
-- Terlihat manis, genit, dan santai
-- Bisa berupa kalimat pendek, pertanyaan, atau sindiran halus
-- Tidak terlalu menjelaskan foto secara literal
-- Lebih terasa seperti caption asli sosmed, bukan hasil translate dan bukan copywriting formal
-- Hindari caption hambar seperti: "sudah siap buat jalan nih", "mas, mampir dong", "malam-malam gini kamu ngapain?", "lagi santai".
-- Caption harus punya hook yang lebih hidup: bikin penasaran, ngajak komentar, centil, atau bikin cowok merasa diajak ngobrol.
-- Jangan terlalu literal menjelaskan foto. Jangan terlalu umum. Jangan kaku.
+- Terlihat genit, centil, teasing, dan sedikit jual mahal.
+- Mengundang komentar dari lawan jenis.
+- Terasa seperti sedang menggoda seseorang yang melihat foto.
+- Caption harus tetap berhubungan secara literal dengan foto, bukan caption yang bisa dipakai di semua foto.
+- Jangan mendeskripsikan foto secara penuh, cukup ambil satu detail yang paling menonjol lalu jadikan hook.
+- Hindari caption generik atau terlalu random.
 
 ATURAN BAHASA:
 - Jika ID: pakai bahasa Indonesia santai, Gen-Z, natural, tidak baku.
@@ -163,16 +154,23 @@ ATURAN BAHASA:
 
 FORMAT OUTPUT WAJIB:
 - Buat tepat 6 caption.
-- Caption 1 dan 2: GAYA 1 (ASBUN Gen-Z). Asbun = asal bunyi, random, spontan, terasa seperti isi kepala atau curhatan receh yang nyambung dengan vibe foto. Tidak harus membahas foto secara langsung. Boleh absurd ringan, overthinking, halu, self-talk, atau pikiran random yang relatable. Harus terasa ditulis manusia, bukan AI.
-- Caption 3 dan 4: GAYA 2 (TEASING & CENTIL). Berupa kalimat menggoda, pertanyaan lucu, godaan tipis, atau pernyataan yang memancing komentar/interaksi. Terasa usil, manja, genit ringan, playful, tetapi tetap sopan dan tidak vulgar.
-- Caption 5: GAYA 1 (ASBUN) + tepat 3 hashtag populer dan relevan.
-- Caption 6: GAYA 2 (TEASING & CENTIL) + tepat 3 hashtag populer dan relevan.
-- Semua caption wajib pendek (4-12 kata), natural, tidak seperti template AI.
+- Caption 1-2: ASBUN Gen-Z, random spontan, tetap berkaitan dengan isi foto, sangat pendek (4-8 kata).
+- Caption 3-4: TEASING CENTIL, genit, teasing, sedikit jual mahal, berkaitan dengan pose, ekspresi, outfit, atau suasana foto, sangat pendek (4-9 kata).
+- Caption 5: ASBUN + tepat 3 hashtag.
+- Caption 6: TEASING CENTIL + tepat 3 hashtag.
+- Semua caption maksimal 9 kata sebelum hashtag.
+- Semua caption harus memiliki panjang yang relatif sama, jangan ada yang jauh lebih panjang.
 - Setiap caption wajib memakai 1-3 emoji yang menyatu alami dengan kalimat.
 - Jangan mengulang ide, hook, emoji, atau pola kalimat.
-- Gunakan bahasa percakapan yang sedang tren di media sosial. Jika perlu gunakan istilah Gen-Z yang umum dipakai di Instagram, Threads, TikTok, Facebook, atau X, namun jangan memaksakan slang.
-- Hindari pembuka generik, quotes motivasi, atau caption yang terdengar seperti copywriting.
+- Gunakan bahasa percakapan Gen-Z yang sedang tren.
+- Hindari pembuka generik, quotes motivasi, atau caption copywriting.
 - Hashtag harus relevan dengan visual, niche, dan tren umum; jangan spam.
+
+ATURAN PENTING:
+- Prioritaskan caption singkat daripada caption panjang.
+- Jika ragu, pilih kalimat yang lebih pendek.
+- Hindari lebih dari satu klausa dalam satu caption.
+- Setiap caption harus terasa seperti satu kalimat spontan yang langsung terlintas di kepala.
 
 REFERENSI TONE, JANGAN COPY PERSIS TERUS:
 ${profile.examples.map((x) => `- ${x}`).join("\n")}
